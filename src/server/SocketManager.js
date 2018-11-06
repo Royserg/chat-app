@@ -6,20 +6,29 @@ const io = require('./index.js').io;
 
 
 // hold connected users, { username: {id: 'x2s', name: username},  }
-const connectedUser = {};
+let connectedUsers = {};
 
 module.exports = function(socket) {
   console.log("Socket ID " + socket.id);
 
   // Verify username
   socket.on(VERIFY_USER, (nickname, callback) => {
-    if(isUser(connectedUser, nickname)) {
+    if(isUser(connectedUsers, nickname)) {
       callback({ isUser: true, user:null });
     } else {
       callback({ isUser: false, user: createUser({name: nickname}) })
     }
   })
   // User connects with username
+  socket.on(USER_CONNECTED, (user) => {
+    connectedUsers = addUser(connectedUsers, user);
+    socket.user = user;
+    /* broadcast to all connected user new list */
+    io.emit(USER_CONNECTED, connectedUsers);
+
+    console.log(connectedUsers);
+    
+  })
 
   // User disconnects
 

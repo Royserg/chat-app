@@ -38,7 +38,8 @@ class Layout extends Component {
     /* send user to server to add into list of connected users */
     socket.emit(USER_CONNECTED, user);
 
-    this.setState({})
+    /* save user in state */
+    this.setState({ user })
   }
 
   /* set user in state to null */
