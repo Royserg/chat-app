@@ -20,13 +20,24 @@ class LoginForm extends Component {
     /* === Also take a callback setUser? ===*/
     socket.emit(VERIFY_USER, nickname, this.setUser);
 
-    console.log("submitting");
+    console.log("submitting name: " + nickname);
   }
 
   handleChange = (e) => {
-    console.log('changing');
-    
     this.setState({ nickname: e.target.value });
+  }
+
+  setUser = ({user, isUser}) => {
+    console.log(`user: ${user}, isUser: ${isUser}`);
+    if (isUser) {
+      this.setError("Username taken");
+    } else {
+      this.props.setUser(user);
+    }
+  }
+
+  setError = (message) => {
+    this.setState({ error: message });
   }
 
   render() { 
