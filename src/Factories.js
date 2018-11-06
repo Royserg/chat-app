@@ -60,5 +60,9 @@ const getTime = (date) => {
 } 
 
 
-
+module.exports = {
+  createChat,
+  createUser,
+  createMessage
+}
 
