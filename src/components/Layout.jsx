@@ -50,7 +50,7 @@ class Layout extends Component {
     this.setState({ user: null });
   }
 
-  render() { 
+  render() {
     const { socket, user } = this.state;
     
     return ( 
