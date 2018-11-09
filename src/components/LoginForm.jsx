@@ -33,7 +33,7 @@ class LoginForm extends Component {
       this.setError("Username taken");
     } else {
       this.props.setUser(user);
-      this.setError(null);
+      // this.setError(null); -> causing error of async setState
     }
   }
 
